@@ -8,6 +8,16 @@ public class TestShooter : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
-	}
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "NetCore" });
+
+        PrivateDependencyModuleNames.AddRange(new string[] { });
+
+        PublicIncludePaths.Add("TestShooter/");
+
+        PublicDependencyModuleNames.AddRange(new string[] {
+            "GameplayAbilities",
+            "GameplayTags",
+            "GameplayTasks"
+        });
+    }
 }
