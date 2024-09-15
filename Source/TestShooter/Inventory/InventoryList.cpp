@@ -3,13 +3,14 @@
 
 #include "Inventory/InventoryList.h"
 #include "Inventory/InventoryItemInstance.h"
+#include "TestShooterStatics.h"
 #include "TestShooterTypes.h"
 
 void FInventoryList::AddItem(TSubclassOf<UItemsStaticData> InItemStaticDataClass)
 {
 	FInventoryListItem& Item = Items.AddDefaulted_GetRef();
 	Item.ItemInstance = NewObject<UInventoryItemInstance>();
-	Item.ItemInstance->Init(InItemStaticDataClass);
+	Item.ItemInstance->Init(InItemStaticDataClass, UTestShooterStatics::GetItemStaticData(InItemStaticDataClass)->MaxStackCount);
 	MarkItemDirty(Item);
 }
 

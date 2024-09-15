@@ -41,27 +41,27 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void EquipItem(TSubclassOf<UItemsStaticData> InItemStaticDataClass);
 
-	/*UFUNCTION(BlueprintCallable)
-	void EquipItemInstance(UInventoryItemInstance* InItemInstance);*/
+	UFUNCTION(BlueprintCallable)
+	void EquipItemInstance(UInventoryItemInstance* InItemInstance);
 
 	UFUNCTION(BlueprintCallable)
 	void UnequipItem();
 
 	/*UFUNCTION(BlueprintCallable)
-	void DropItem();
+	void DropItem();*/
 
 	UFUNCTION(BlueprintCallable)
-	void EquipNext();*/
+	void EquipNext();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	UInventoryItemInstance* GetEquippedItem() const;
 
 	//virtual void GameplayEventCallback(const FGameplayEventData* Payload);
 
-	//static FGameplayTag EquipItemActorTag;
-	//static FGameplayTag DropItemTag;
-	//static FGameplayTag EquipNextTag;
-	//static FGameplayTag UnequipTag;
+	static FGameplayTag EquipItemActorTag;
+	static FGameplayTag DropItemTag;
+	static FGameplayTag EquipNextTag;
+	static FGameplayTag UnequipTag;
 
 	//UFUNCTION(BlueprintCallable)
 	//int32 GetInventoryTagCount(FGameplayTag Tag) const;

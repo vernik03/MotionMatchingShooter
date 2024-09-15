@@ -86,6 +86,22 @@ protected:
 	//UPROPERTY(EditAnywhere, Replicated)
 	//UNewInventoryComponent* InventoryComponent = nullptr;
 
+public:
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag AttackStartedEventTag;
+
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag AttackEndedEventTag;
+
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag AimStartedEventTag;
+
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag AimEndedEventTag;
+
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag ZeroHealthEventTag;
+
 
 	UPROPERTY(EditAnywhere, Replicated)
 	UNewInventoryComponent* NewInventoryComponent = nullptr;

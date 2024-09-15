@@ -32,6 +32,18 @@ class TESTSHOOTER_API ATestShooterController : public APlayerController
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* EquipNextInputAction;
+
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* UnequipInputAction;
+
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* AttackInputAction;
+
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* AimInputAction;
+
 
 public:
 
@@ -44,6 +56,21 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+
+	void OnAttackActionStarted(const FInputActionValue& Value);
+
+	void OnAttackActionEnded(const FInputActionValue& Value);
+
+
+	void OnEquipNextTriggered(const FInputActionValue& Value);
+
+	void OnUnequipTriggered(const FInputActionValue& Value);
+
+	void OnAimActionStarted(const FInputActionValue& Value);
+
+	void OnAimActionEnded(const FInputActionValue& Value);
+
+
 
 	
 };

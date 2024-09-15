@@ -49,6 +49,17 @@ void AItemActor::Init(UInventoryItemInstance* InItemInstance)
 void AItemActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (HasAuthority())
+	{
+		if (!IsValid(ItemInstance) && IsValid(ItemStaticDataClass))
+		{
+			ItemInstance = NewObject<UInventoryItemInstance>();
+			ItemInstance->Init(ItemStaticDataClass, Quantity);
+
+			InitInternal();
+		}
+	}
 	
 }
 

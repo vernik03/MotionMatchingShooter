@@ -6,6 +6,11 @@
 #include "Net/UnrealNetwork.h"
 
 
+FGameplayTag UNewInventoryComponent::EquipItemActorTag;
+FGameplayTag UNewInventoryComponent::DropItemTag;
+FGameplayTag UNewInventoryComponent::EquipNextTag;
+FGameplayTag UNewInventoryComponent::UnequipTag;
+
 static TAutoConsoleVariable<int32> CVarShowInventory(
 	TEXT("CVarShowInventory"),
 	0,
@@ -85,6 +90,22 @@ void UNewInventoryComponent::EquipItem(TSubclassOf<UItemsStaticData> InItemStati
 	}
 }
 
+void UNewInventoryComponent::EquipItemInstance(UInventoryItemInstance* InItemInstance)
+{
+	if (GetOwner()->HasAuthority())
+	{
+		for (auto Item : InventoryList.GetItemsRef())
+		{
+			if (Item.ItemInstance == InItemInstance)
+			{
+				Item.ItemInstance->OnEquipped(GetOwner());
+				CurrentItem = Item.ItemInstance;
+				break;
+			}
+		}
+	}
+}
+
 void UNewInventoryComponent::UnequipItem()
 {
 	if (GetOwner()->HasAuthority())
@@ -95,6 +116,42 @@ void UNewInventoryComponent::UnequipItem()
 			CurrentItem = nullptr;
 		}
 	}
+}
+
+void UNewInventoryComponent::EquipNext()
+{
+	TArray<FInventoryListItem>& Items = InventoryList.GetItemsRef();
+
+	const bool bNoItems = Items.Num() == 0;
+	const bool bOneAndEquipped = Items.Num() == 1 && CurrentItem;
+
+	if (bNoItems || bOneAndEquipped) return;
+
+	UInventoryItemInstance* TargetItem = CurrentItem;
+
+	for (auto Item : Items)
+	{
+		if (Item.ItemInstance->GetItemStaticData()->bCanBeEquipped)
+		{
+			if (Item.ItemInstance != CurrentItem)
+			{
+				TargetItem = Item.ItemInstance;
+				break;
+			}
+		}
+	}
+
+	if (CurrentItem)
+	{
+		if (TargetItem == CurrentItem)
+		{
+			return;
+		}
+
+		UnequipItem();
+	}
+
+	EquipItemInstance(TargetItem);
 }
 
 UInventoryItemInstance* UNewInventoryComponent::GetEquippedItem() const

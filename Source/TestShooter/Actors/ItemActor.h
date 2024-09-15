@@ -6,10 +6,12 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "TestShooterTypes.h"
+#include "Abilities/GameplayAbilityTypes.h"
 #include "ItemActor.generated.h"
 
 
 class UInventoryItemInstance;
+class UItemActor;
 
 UCLASS()
 class TESTSHOOTER_API AItemActor : public AActor
