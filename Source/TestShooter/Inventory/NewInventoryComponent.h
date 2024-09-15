@@ -16,7 +16,6 @@ class TESTSHOOTER_API UNewInventoryComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this component's properties
 	UNewInventoryComponent();
 
 	virtual void InitializeComponent() override;
@@ -26,17 +25,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AddItem(TSubclassOf<UItemsStaticData> InItemStaticDataClass);
 
-	//UFUNCTION(BlueprintCallable)
-	//void AddItemInstance(UInventoryItemInstance* InItemInstance);
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItem(TSubclassOf<UItemsStaticData> InItemStaticDataClass);
-
-	/*UFUNCTION(BlueprintCallable)
-	void RemoveItemInstance(UInventoryItemInstance* InItemInstance);
-
-	UFUNCTION(BlueprintCallable)
-	void RemoveItemWithInventoryTag(FGameplayTag Tag, int32 Count = 1);*/
 
 	UFUNCTION(BlueprintCallable)
 	void EquipItem(TSubclassOf<UItemsStaticData> InItemStaticDataClass);
@@ -47,29 +38,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UnequipItem();
 
-	/*UFUNCTION(BlueprintCallable)
-	void DropItem();*/
-
 	UFUNCTION(BlueprintCallable)
 	void EquipNext();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	UInventoryItemInstance* GetEquippedItem() const;
 
-	//virtual void GameplayEventCallback(const FGameplayEventData* Payload);
 
 	static FGameplayTag EquipItemActorTag;
 	static FGameplayTag EquipNextTag;
-	//UFUNCTION(BlueprintCallable)
-	//int32 GetInventoryTagCount(FGameplayTag Tag) const;
-
-	//UFUNCTION(BlueprintCallable)
-	//void AddInventoryTagCount(FGameplayTag InTag, int32 CountDelta);
 
 protected:
 
-	//UFUNCTION()
-	//void AddInventoryTags();
 
 	UPROPERTY(Replicated)
 	FInventoryList InventoryList;
@@ -79,13 +59,6 @@ protected:
 
 	UPROPERTY(Replicated)
 	UInventoryItemInstance* CurrentItem = nullptr;
-
-	//UPROPERTY(Replicated)
-	//FFastArrayTagCounter InventoryTags;
-
-	//TArray<UInventoryItemInstance*> GetAllInstancesWithTag(FGameplayTag Tag);
-
-	//void HandleGameplayEventInternal(FGameplayEventData Payload);
 
 	UFUNCTION(Server, Reliable)
 	void ServerHandleGameplayEvent(FGameplayEventData Payload);

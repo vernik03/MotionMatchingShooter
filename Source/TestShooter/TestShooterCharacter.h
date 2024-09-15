@@ -86,9 +86,6 @@ protected:
 	UPROPERTY(ReplicatedUsing = OnRep_CharacterData)
 	FMyCharacterData CharacterData;
 
-	//UPROPERTY(EditAnywhere, Replicated)
-	//UNewInventoryComponent* InventoryComponent = nullptr;
-
 public:
 	UPROPERTY(EditDefaultsOnly)
 	FGameplayTag AttackStartedEventTag;
