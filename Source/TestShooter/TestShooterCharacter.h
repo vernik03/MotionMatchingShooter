@@ -54,6 +54,9 @@ protected:
 
 	virtual void InitFromFCharacterData(const FMyCharacterData& InCharacterData, bool bFromReplication = false);
 
+	UFUNCTION(BlueprintCallable)
+	void StartRagdoll();
+
 
 public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

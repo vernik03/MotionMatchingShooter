@@ -91,8 +91,8 @@ public:
 	float BaseDamage;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	USoundBase* AttackSound;
+	int AmmoCount;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayTag AmmoTag;
+	USoundBase* AttackSound;
 };

@@ -163,6 +163,22 @@ void ATestShooterCharacter::SetCharacterData(const FMyCharacterData& InCharacter
 	InitFromFCharacterData(CharacterData);
 }
 
+void ATestShooterCharacter::StartRagdoll()
+{
+	USkeletalMeshComponent* SkeletalMesh = GetMesh();
+
+	if (SkeletalMesh && !SkeletalMesh->IsSimulatingPhysics())
+	{
+		SkeletalMesh->SetCollisionProfileName(TEXT("Ragdoll"));
+		SkeletalMesh->SetSimulatePhysics(true);
+		SkeletalMesh->SetAllPhysicsLinearVelocity(FVector::ZeroVector);
+		SkeletalMesh->SetAllPhysicsAngularVelocityInDegrees(FVector::ZeroVector);
+		SkeletalMesh->WakeAllRigidBodies();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	}
+}
+
 void ATestShooterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
