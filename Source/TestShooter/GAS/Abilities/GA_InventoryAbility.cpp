@@ -9,6 +9,9 @@
 #include "TestShooterTypes.h"
 #include "Actors/ItemActor.h"
 #include "Inventory/ItemActors/WeaponActor.h"
+#include "AbilitySystemComponent.h"
+#include <AbilitySystemBlueprintLibrary.h>
+
 
 void UGA_InventoryAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
 {
@@ -52,3 +55,21 @@ AWeaponActor* UGA_InventoryAbility::GetEquippedWeaponItemActor() const
 }
 
 
+FGameplayEffectSpecHandle UGA_InventoryAbility::GetWeaponEffectSpec(const FHitResult& InHitResult)
+{
+	if (UAbilitySystemComponent* AbilityComponent = GetAbilitySystemComponentFromActorInfo())
+	{
+		if (const UWeaponStaticData* WeaponStaticData = GetEquippedItemWeaponStaticData())
+		{
+			FGameplayEffectContextHandle EffectContext = AbilityComponent->MakeEffectContext();
+
+			FGameplayEffectSpecHandle OutSpec = AbilityComponent->MakeOutgoingSpec(WeaponStaticData->DamageEffect, 1, EffectContext);
+
+			UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(OutSpec, FGameplayTag::RequestGameplayTag(TEXT("Attribute.Health")), -WeaponStaticData->BaseDamage);
+
+			return OutSpec;
+		}
+	}
+
+	return FGameplayEffectSpecHandle();
+}

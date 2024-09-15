@@ -102,8 +102,23 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	FGameplayTag ZeroHealthEventTag;
 
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag JogStartedEventTag;
 
-	UPROPERTY(EditAnywhere, Replicated)
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag JogEndedEventTag;
+
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag CrouchStartedEventTag;
+
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag CrouchEndedEventTag;
+
+	UPROPERTY(EditDefaultsOnly)
+	FGameplayTag EquipNextEventTag;
+
+
+	UPROPERTY(EditAnywhere, Replicated, BlueprintReadOnly)
 	UNewInventoryComponent* NewInventoryComponent = nullptr;
 
 };

@@ -7,9 +7,7 @@
 
 
 FGameplayTag UNewInventoryComponent::EquipItemActorTag;
-FGameplayTag UNewInventoryComponent::DropItemTag;
 FGameplayTag UNewInventoryComponent::EquipNextTag;
-FGameplayTag UNewInventoryComponent::UnequipTag;
 
 static TAutoConsoleVariable<int32> CVarShowInventory(
 	TEXT("CVarShowInventory"),

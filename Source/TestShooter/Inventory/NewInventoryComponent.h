@@ -59,10 +59,7 @@ public:
 	//virtual void GameplayEventCallback(const FGameplayEventData* Payload);
 
 	static FGameplayTag EquipItemActorTag;
-	static FGameplayTag DropItemTag;
 	static FGameplayTag EquipNextTag;
-	static FGameplayTag UnequipTag;
-
 	//UFUNCTION(BlueprintCallable)
 	//int32 GetInventoryTagCount(FGameplayTag Tag) const;
 

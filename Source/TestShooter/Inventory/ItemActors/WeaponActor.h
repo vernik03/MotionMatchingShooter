@@ -18,6 +18,7 @@ public:
 
 	AWeaponActor();
 
+	UFUNCTION(BlueprintCallable)
 	const UWeaponStaticData* GetWeaponStaticData() const;
 
 	UFUNCTION(BlueprintPure)
@@ -33,7 +34,11 @@ protected:
 
 	void PlayWeaponEffectsInternal(const FHitResult& InHitResult);
 
-	UPROPERTY()
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayWeaponEffectsInBP(const FHitResult& InHitResult);
+
+
+	UPROPERTY(BlueprintReadWrite)
 	UMeshComponent* MeshComponent = nullptr;
 
 	virtual void InitInternal() override;

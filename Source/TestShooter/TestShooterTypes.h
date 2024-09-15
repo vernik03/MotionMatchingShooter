@@ -82,6 +82,9 @@ public:
 	UAnimMontage* AttackMontage;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UAnimationAsset* WeaponMontage;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float FireRate;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)

@@ -36,13 +36,17 @@ class TESTSHOOTER_API ATestShooterController : public APlayerController
 	UInputAction* EquipNextInputAction;
 
 	UPROPERTY(EditDefaultsOnly)
-	UInputAction* UnequipInputAction;
-
-	UPROPERTY(EditDefaultsOnly)
 	UInputAction* AttackInputAction;
 
 	UPROPERTY(EditDefaultsOnly)
 	UInputAction* AimInputAction;
+
+
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* JogInputAction;
+
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* CrouchInputAction;
 
 
 public:
@@ -64,13 +68,19 @@ protected:
 
 	void OnEquipNextTriggered(const FInputActionValue& Value);
 
-	void OnUnequipTriggered(const FInputActionValue& Value);
-
 	void OnAimActionStarted(const FInputActionValue& Value);
 
 	void OnAimActionEnded(const FInputActionValue& Value);
 
 
+	void OnJogActionStarted(const FInputActionValue& Value);
 
-	
+	void OnJogActionEnded(const FInputActionValue& Value);
+
+	void OnCrouchActionStarted(const FInputActionValue& Value);
+
+	void OnCrouchActionEnded(const FInputActionValue& Value);
+
+
+
 };

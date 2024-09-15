@@ -39,6 +39,9 @@ public:
 	UFUNCTION(BlueprintPure)
 	AWeaponActor* GetEquippedWeaponItemActor() const;
 
+	UFUNCTION(BlueprintPure)
+	FGameplayEffectSpecHandle GetWeaponEffectSpec(const FHitResult& InHitResult);
+
 protected:
 
 	UPROPERTY()

@@ -36,11 +36,6 @@ void ATestShooterController::SetupInput(UInputComponent* PlayerInputComponent)
 			EnhancedInputComponent->BindAction(EquipNextInputAction, ETriggerEvent::Triggered, this, &ATestShooterController::OnEquipNextTriggered);
 		}
 
-		if (UnequipInputAction)
-		{
-			EnhancedInputComponent->BindAction(UnequipInputAction, ETriggerEvent::Triggered, this, &ATestShooterController::OnUnequipTriggered);
-		}
-
 		if (AttackInputAction)
 		{
 			EnhancedInputComponent->BindAction(AttackInputAction, ETriggerEvent::Started, this, &ATestShooterController::OnAttackActionStarted);
@@ -51,6 +46,18 @@ void ATestShooterController::SetupInput(UInputComponent* PlayerInputComponent)
 		{
 			EnhancedInputComponent->BindAction(AimInputAction, ETriggerEvent::Started, this, &ATestShooterController::OnAimActionStarted);
 			EnhancedInputComponent->BindAction(AimInputAction, ETriggerEvent::Completed, this, &ATestShooterController::OnAimActionEnded);
+		}
+
+		if (JogInputAction)
+		{
+			EnhancedInputComponent->BindAction(JogInputAction, ETriggerEvent::Started, this, &ATestShooterController::OnJogActionStarted);
+			EnhancedInputComponent->BindAction(JogInputAction, ETriggerEvent::Completed, this, &ATestShooterController::OnJogActionEnded);
+		}
+
+		if (CrouchInputAction)
+		{
+			EnhancedInputComponent->BindAction(CrouchInputAction, ETriggerEvent::Started, this, &ATestShooterController::OnCrouchActionStarted);
+			EnhancedInputComponent->BindAction(CrouchInputAction, ETriggerEvent::Completed, this, &ATestShooterController::OnCrouchActionEnded);
 		}
 	}
 	else
@@ -87,17 +94,9 @@ void ATestShooterController::Look(const FInputActionValue& Value)
 void ATestShooterController::OnEquipNextTriggered(const FInputActionValue& Value)
 {
 	FGameplayEventData EventPayload;
-	EventPayload.EventTag = UNewInventoryComponent::EquipNextTag;
+	EventPayload.EventTag = Cast<ATestShooterCharacter>(GetPawn())->EquipNextEventTag;
 
-	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetPawn(), UNewInventoryComponent::EquipNextTag, EventPayload);
-}
-
-void ATestShooterController::OnUnequipTriggered(const FInputActionValue& Value)
-{
-	FGameplayEventData EventPayload;
-	EventPayload.EventTag = UNewInventoryComponent::UnequipTag;
-
-	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetPawn(), UNewInventoryComponent::UnequipTag, EventPayload);
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetPawn(), Cast<ATestShooterCharacter>(GetPawn())->EquipNextEventTag, EventPayload);
 }
 
 void ATestShooterController::OnAttackActionStarted(const FInputActionValue& Value)
@@ -116,6 +115,7 @@ void ATestShooterController::OnAttackActionEnded(const FInputActionValue& Value)
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetPawn(), Cast<ATestShooterCharacter>(GetPawn())->AttackEndedEventTag, EventPayload);
 }
 
+
 void ATestShooterController::OnAimActionStarted(const FInputActionValue& Value)
 {
 	FGameplayEventData EventPayload;
@@ -130,4 +130,36 @@ void ATestShooterController::OnAimActionEnded(const FInputActionValue& Value)
 	EventPayload.EventTag = Cast<ATestShooterCharacter>(GetPawn())->AimEndedEventTag;
 
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetPawn(), Cast<ATestShooterCharacter>(GetPawn())->AimEndedEventTag, EventPayload);
+}
+
+void ATestShooterController::OnJogActionStarted(const FInputActionValue& Value)
+{
+	FGameplayEventData EventPayload;
+	EventPayload.EventTag = Cast<ATestShooterCharacter>(GetPawn())->JogStartedEventTag;
+
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetPawn(), Cast<ATestShooterCharacter>(GetPawn())->JogStartedEventTag, EventPayload);
+}
+
+void ATestShooterController::OnJogActionEnded(const FInputActionValue& Value)
+{
+	FGameplayEventData EventPayload;
+	EventPayload.EventTag = Cast<ATestShooterCharacter>(GetPawn())->JogEndedEventTag;
+
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetPawn(), Cast<ATestShooterCharacter>(GetPawn())->JogEndedEventTag, EventPayload);
+}
+
+void ATestShooterController::OnCrouchActionStarted(const FInputActionValue& Value)
+{
+	FGameplayEventData EventPayload;
+	EventPayload.EventTag = Cast<ATestShooterCharacter>(GetPawn())->CrouchStartedEventTag;
+
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetPawn(), Cast<ATestShooterCharacter>(GetPawn())->CrouchStartedEventTag, EventPayload);
+}
+
+void ATestShooterController::OnCrouchActionEnded(const FInputActionValue& Value)
+{
+	FGameplayEventData EventPayload;
+	EventPayload.EventTag = Cast<ATestShooterCharacter>(GetPawn())->CrouchEndedEventTag;
+
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetPawn(), Cast<ATestShooterCharacter>(GetPawn())->CrouchEndedEventTag, EventPayload);
 }

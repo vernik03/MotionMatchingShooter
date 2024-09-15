@@ -53,6 +53,7 @@ void AWeaponActor::InitInternal()
 
 
 void AWeaponActor::PlayWeaponEffects(const FHitResult& InHitResult)
+
 {
 	if (HasAuthority())
 	{
@@ -74,17 +75,8 @@ void AWeaponActor::MulticastPlayWeaponEffects_Implementation(const FHitResult& I
 
 void AWeaponActor::PlayWeaponEffectsInternal(const FHitResult& InHitResult)
 {
-	if (InHitResult.PhysMaterial.Get())
-	{
-	/*	UAG_PhysicalMaterial* PhysicalMaterial = Cast<UAG_PhysicalMaterial>(InHitResult.PhysMaterial.Get());
+	PlayWeaponEffectsInBP(InHitResult);
 
-		if (PhysicalMaterial)
-		{
-			UGameplayStatics::PlaySoundAtLocation(this, PhysicalMaterial->PointImpactSound, InHitResult.ImpactPoint, 1.f);
-
-			UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, PhysicalMaterial->PointImpactVFX, InHitResult.ImpactPoint);
-		}*/
-	}
 
 	if (const UWeaponStaticData* WeaponData = GetWeaponStaticData())
 	{
